@@ -14,26 +14,44 @@ document.getElementById('btn-withdraw').addEventListener('click', function(){
 //Step 2 : Getting Withdraw Amount :
 const withdrawField = document.getElementById('withdraw-field');
 const newWithdrawAmount = parseFloat(withdrawField.value);
+
+//Step 7 : Clear the deposit field
+withdrawField.value = '';
+
+if(isNaN(newWithdrawAmount)){
+    alert('please provide a Number')
+    return
+}
  
 //Step 3:
  
 const withdrawTotalElement = document.getElementById('withdraw-total');
 const previousWithdrawTotal = parseFloat(withdrawTotalElement.innerText) ;
  
-//Step 4 :
- 
-const currentTotalWithdrawAmount = previousWithdrawTotal + newWithdrawAmount;
-withdrawTotalElement.innerText= currentTotalWithdrawAmount;
+
  
 //step 5 :
  
 const balanceTotalElement = document.getElementById('balance-total');
 const previousBalanceTotal = parseFloat(balanceTotalElement.innerText);
-const currentTotalBalance = previousBalanceTotal - newWithdrawAmount;
+
+
+
+if(newWithdrawAmount > previousBalanceTotal){
+    alert('Insufficient Balance'); 
+    return
+}
+
+//Step 4 :
+ 
+const currentTotalWithdrawAmount = previousWithdrawTotal + newWithdrawAmount;
+withdrawTotalElement.innerText= currentTotalWithdrawAmount;
 //Step 6: Update the balance total
+
+const currentTotalBalance = previousBalanceTotal - newWithdrawAmount;
 balanceTotalElement.innerText = currentTotalBalance;
-//Step 7 : Clear the deposit field
-withdrawField.value = '';
+
+
  
 })
 
